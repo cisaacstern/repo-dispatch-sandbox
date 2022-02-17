@@ -2,7 +2,7 @@ name: repository-dispatch
 
 on:
   repository_dispatch:
-    types: [register-flow]
+    types: [check-request]
 
 jobs:
   check-request:
