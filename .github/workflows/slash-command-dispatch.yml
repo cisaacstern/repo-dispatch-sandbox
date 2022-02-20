@@ -10,7 +10,7 @@ jobs:
         uses: peter-evans/slash-command-dispatch@v2
         with:
           token: ${{ secrets.PAT }}
-          repository: pangeo-forge/registrar
+          # repository: pangeo-forge/registrar
           permission: admin
           commands: |
             run
