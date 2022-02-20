@@ -13,4 +13,4 @@ jobs:
           repository: pangeo-forge/registrar
           permission: admin
           commands: |
-            create-and-register
+            run
