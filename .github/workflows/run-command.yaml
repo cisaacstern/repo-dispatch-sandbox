@@ -1,0 +1,15 @@
+name: run-command-slash-dispatch
+
+on:
+  repository_dispatch:
+    types: [run-command]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump the client payload context
+        env:
+          PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload) }}
+        run: echo "$PAYLOAD_CONTEXT"
+ 
