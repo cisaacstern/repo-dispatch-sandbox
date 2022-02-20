@@ -13,4 +13,4 @@ jobs:
         #  PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload) }}
         # run: echo "$PAYLOAD_CONTEXT"
         run: |
-          ${{ toJson(github.event.client_payload) }}
+          ${{ fromJson(github.event.client_payload) }}
