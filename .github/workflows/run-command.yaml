@@ -11,6 +11,10 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - name: Dump the client payload context
+      - id: 'run-container'
+        name: 'Pass PAYLOAD_CONTEXT to Dockerized click application to parse and run'
         run: |
-          echo "${{ env.PAYLOAD_CONTEXT }}"
+          docker run -i \
+          pangeo/pangeo-forge-registrar-images:latest \
+          parse \
+          "${{ env.PAYLOAD_CONTEXT }}" \
