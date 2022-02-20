@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Dump the client payload context
-        # env:
+       env:
         #  PAYLOAD_CONTEXT: ${{ toJson(github.event.client_payload) }}
         # run: echo "$PAYLOAD_CONTEXT"
         run: |
-          ${{ fromJson(github.event.client_payload) }}
+          echo "${{ toJson(github.event.client_payload) }}"
