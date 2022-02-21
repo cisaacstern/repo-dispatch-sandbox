@@ -15,6 +15,6 @@ jobs:
         name: 'Pass PAYLOAD_CONTEXT to Dockerized click application to parse and run'
         run: |
           docker run -i \
-          -e PAYLOAD_CONTEXT=${{ env.PAYLOAD_CONTEXT }} \
+          -e PAYLOAD_CONTEXT="${{ env.PAYLOAD_CONTEXT }}" \
           pangeo/pangeo-forge-registrar-images:latest \
           print-env \
