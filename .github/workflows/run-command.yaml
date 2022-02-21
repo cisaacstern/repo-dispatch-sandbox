@@ -17,4 +17,4 @@ jobs:
           docker run -i \
           -e PAYLOAD_CONTEXT=${{ env.PAYLOAD_CONTEXT }} \
           pangeo/pangeo-forge-registrar-images:latest \
-          parse \
+          print-env \
