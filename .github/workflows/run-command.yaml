@@ -14,7 +14,12 @@ jobs:
       - id: 'run-container'
         name: 'Pass PAYLOAD_CONTEXT to Dockerized click application to parse and run'
         run: |
+          PAYLOAD_CONTEXT=$( cat <<EOF
+          ${{ toJson(github.event.client_payload) }}
+          EOF
+          ) \
+          && \
           docker run -i \
-          -e PAYLOAD_CONTEXT="${{ github.event.client_payload }}" \
+          -e PAYLOAD_CONTEXT \
           pangeo/pangeo-forge-registrar-images:latest \
           print-env \
