@@ -1,0 +1,23 @@
+name: pull-request-commit
+
+on:
+  pull_request:
+    branches: main
+    paths:
+      - 'recipes/**'
+
+jobs:
+  pull-request-commit:
+    runs-on: ubuntu-latest
+    env:
+      FEEDSTOCK_SPEC: "${{ github.event.client_payload.github.payload.repository.full_name }}"
+      HEAD_SHA: "${{ github.sha }}"
+      ISSUE: "${{ github.event.client_payload.github.payload.issue.number }}
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.PAT }}
+          repository: pangeo-forge/registrar
+          event-type: pull-request-commit
+          client-payload: '{"feedstock_spec": $FEEDSTOCK_SPEC, "head_sha": $HEAD_SHA, "issue": $ISSUE}'
