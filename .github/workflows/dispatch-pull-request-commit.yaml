@@ -20,4 +20,4 @@ jobs:
           token: ${{ secrets.PAT }}
           repository: pangeo-forge/registrar
           event-type: pull-request-commit
-          client-payload: '{"feedstock_spec": $FEEDSTOCK_SPEC, "head_sha": $HEAD_SHA, "issue": $ISSUE}'
+          client-payload: '{"feedstock_spec": "${{ env.FEEDSTOCK_SPEC }}", "head_sha": "${{ env.HEAD_SHA }}", "issue": "${{ env.ISSUE }}"}'
