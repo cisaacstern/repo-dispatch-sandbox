@@ -7,14 +7,14 @@ on:
       - 'recipes/**'
 
 jobs:
-  pull-request-commit:
+  dispatch:
     runs-on: ubuntu-latest
     env:
       FEEDSTOCK_SPEC: "${{ github.event.client_payload.github.payload.repository.full_name }}"
       HEAD_SHA: "${{ github.sha }}"
       ISSUE: "${{ github.event.client_payload.github.payload.issue.number }}"
     steps:
-      - name: Repository Dispatch
+      - name: dispatch
         uses: peter-evans/repository-dispatch@v1
         with:
           token: ${{ secrets.PAT }}
