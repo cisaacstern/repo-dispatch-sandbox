@@ -12,7 +12,7 @@ jobs:
     env:
       FEEDSTOCK_SPEC: "${{ github.event.client_payload.github.payload.repository.full_name }}"
       HEAD_SHA: "${{ github.sha }}"
-      ISSUE: "${{ github.event.client_payload.github.payload.issue.number }}
+      ISSUE: "${{ github.event.client_payload.github.payload.issue.number }}"
     steps:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v1
