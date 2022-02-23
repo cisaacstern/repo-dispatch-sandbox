@@ -10,7 +10,8 @@ jobs:
   dispatch:
     runs-on: ubuntu-latest
     env:
-      FEEDSTOCK_SPEC: "${{ github.repository }}"
+      # FEEDSTOCK_SPEC: "${{ github.repository }}"
+      FEEDSTOCK_SPEC: "pangeo-forge/staged-recipes"
       HEAD_SHA: "${{ github.sha }}"
       PR_NUMBER: "${{ github.event.pull_request.number }}"
     steps:
