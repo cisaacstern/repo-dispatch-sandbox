@@ -1,10 +1,10 @@
 name: Create recipe runs
 
 on:
-  pull_request:
-    branches: main
-    paths:
-      - 'recipes/**'
+  #pull_request:
+  #  branches: main
+  #  paths:
+  #    - 'recipes/**'
 
 jobs:
   dispatch:
