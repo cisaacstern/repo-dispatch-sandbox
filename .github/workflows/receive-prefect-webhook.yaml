@@ -1,0 +1,11 @@
+name: Receive Prefect Webhook
+on:
+  repository_dispatch:
+    types: [prefect_webhook]
+jobs:
+  receive:
+    runs-on: ubuntu-latest
+    steps:
+      - id: 'receive-prefect-webhook'
+        run: |
+          
