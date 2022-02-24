@@ -18,4 +18,4 @@ def format_function(time):
 
 dates = pd.date_range(start_date, "2021-01-05", freq="D")
 pattern = FilePattern(format_function, ConcatDim("time", range(len(dates)), 1))
-recipe0 = XarrayZarrRecipe(pattern, inputs_per_chunk=20, cache_inputs=True)
+recipe = XarrayZarrRecipe(pattern, inputs_per_chunk=20, cache_inputs=True)
