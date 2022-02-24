@@ -8,4 +8,4 @@ jobs:
     steps:
       - id: 'receive-prefect-webhook'
         run: |
-          
+          echo ${{ toJson(github.event.client_payload) }}
