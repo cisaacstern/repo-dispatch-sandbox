@@ -27,8 +27,8 @@ jobs:
       - id: echo-vars
         run: |
           echo ${{ contains(github.event.pull_request.labels.*.name, 'dev') }}
-          echo "$PANGEO_FORGE_API_KEY"
-          echo "$PANGEO_FORGE_API_URL"
+          echo $PANGEO_FORGE_API_KEY
+          echo $PANGEO_FORGE_API_URL
       #- name: dispatch
       #  uses: peter-evans/repository-dispatch@v1
       #  with:
