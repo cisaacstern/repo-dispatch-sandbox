@@ -1,10 +1,10 @@
 name: Create recipe runs
 
 on:
-  #pull_request:
-  #  branches: main
-  #  paths:
-  #    - 'recipes/**'
+  pull_request:
+    branches: main
+    paths:
+      - 'recipes/**'
 
 jobs:
   dispatch:
@@ -13,11 +13,15 @@ jobs:
       FEEDSTOCK_SPEC: "${{ github.repository }}"
       HEAD_SHA: "${{ github.sha }}"
       PR_NUMBER: "${{ github.event.pull_request.number }}"
+      LABELS: "${{ github.event.pull_request.labels }}"
     steps:
-      - name: dispatch
-        uses: peter-evans/repository-dispatch@v1
-        with:
-          token: ${{ secrets.PAT }}
-          repository: pangeo-forge/registrar
-          event-type: pull-request-commit
-          client-payload: '{"feedstock_spec": "${{ env.FEEDSTOCK_SPEC }}", "head_sha": "${{ env.HEAD_SHA }}", "pr_number": "${{ env.PR_NUMBER }}"}'
+      - name: echo-labels
+        run: |
+          echo "$LABELS"
+      #- name: dispatch
+      #  uses: peter-evans/repository-dispatch@v1
+      #  with:
+      #    token: ${{ secrets.PAT }}
+      #    repository: pangeo-forge/registrar
+      #    event-type: pull-request-commit
+      #    client-payload: '{"feedstock_spec": "${{ env.FEEDSTOCK_SPEC }}", "head_sha": "${{ env.HEAD_SHA }}", "pr_number": "${{ env.PR_NUMBER }}"}'
