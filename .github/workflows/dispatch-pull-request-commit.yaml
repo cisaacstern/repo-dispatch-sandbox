@@ -15,20 +15,23 @@ jobs:
       PR_NUMBER: "${{ github.event.pull_request.number }}"
     steps:
       - id: maybe-set-staging-api-vars
-        if: contains(github.event.pull_request.labels.*.name, 'dev')
-        env:
-          PANGEO_FORGE_API_KEY: "PANGEO_FORGE_API_KEY_STAGING"
-          PANGEO_FORGE_API_URL: "https://api-staging.pangeo-forge.org/"
-      - id: maybe-set-prod-api-vars
-        if: ${{ !contains(github.event.pull_request.labels.*.name, 'dev') }}
-        env:
-          PANGEO_FORGE_API_KEY: "PANGEO_FORGE_API_KEY_STAGING"
-          PANGEO_FORGE_API_URL: "https://api-staging.pangeo-forge.org/"
-      - id: echo-vars
         run: |
-          echo ${{ contains(github.event.pull_request.labels.*.name, 'dev') }}
-          echo ${{ env.PANGEO_FORGE_API_KEY }}
-          echo ${{ env.PANGEO_FORGE_API_URL }}
+          echo 1
+      #  if: contains(github.event.pull_request.labels.*.name, 'dev')
+      #  env:
+      #    PANGEO_FORGE_API_KEY: "PANGEO_FORGE_API_KEY_STAGING"
+      #    PANGEO_FORGE_API_URL: "https://api-staging.pangeo-forge.org/"
+      #- id: maybe-set-prod-api-vars
+      #  if: ${{ !contains(github.event.pull_request.labels.*.name, 'dev') }}
+      #  env:
+      #    PANGEO_FORGE_API_KEY: "PANGEO_FORGE_API_KEY_STAGING"
+      #    PANGEO_FORGE_API_URL: "https://api-staging.pangeo-forge.org/"
+      #- id: echo-vars
+      #  run: |
+      #    echo ${{ contains(github.event.pull_request.labels.*.name, 'dev') }}
+      #    echo ${{ env.PANGEO_FORGE_API_KEY }}
+      #    echo ${{ env.PANGEO_FORGE_API_URL }}
+  
       #- name: dispatch
       #  uses: peter-evans/repository-dispatch@v1
       #  with:
