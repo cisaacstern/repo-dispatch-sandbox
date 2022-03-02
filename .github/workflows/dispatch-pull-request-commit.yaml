@@ -13,11 +13,22 @@ jobs:
       FEEDSTOCK_SPEC: "${{ github.repository }}"
       HEAD_SHA: "${{ github.sha }}"
       PR_NUMBER: "${{ github.event.pull_request.number }}"
-      IS_DEV: "${{ contains(github.event.pull_request.labels.*.name, 'dev') }}"
     steps:
-      - name: echo-labels
+      - id: maybe-export-staging-vars
+        if: contains(github.event.pull_request.labels.*.name, 'dev')
         run: |
-          echo "$IS_DEV"
+          export PANGEO_FORGE_API_KEY="PANGEO_FORGE_API_KEY_STAGING" \
+          export PANGEO_FORGE_API_URL="https://api-staging.pangeo-forge.org/" \
+      - id: maybe-export-prod-vars
+        if: ${{ !contains(github.event.pull_request.labels.*.name, 'dev') }}
+        run: |
+          export PANGEO_FORGE_API_KEY="PANGEO_FORGE_API_KEY_PROD" \
+          export PANGEO_FORGE_API_URL="https://api.pangeo-forge.org/" \
+      - id: echo-vars
+        run: |
+          echo ${{ contains(github.event.pull_request.labels.*.name, 'dev') }}
+          echo "$PANGEO_FORGE_API_KEY"
+          echo "$PANGEO_FORGE_API_URL"
       #- name: dispatch
       #  uses: peter-evans/repository-dispatch@v1
       #  with:
