@@ -13,11 +13,11 @@ jobs:
       FEEDSTOCK_SPEC: "${{ github.repository }}"
       HEAD_SHA: "${{ github.sha }}"
       PR_NUMBER: "${{ github.event.pull_request.number }}"
-      LABELS: "${{ github.event.pull_request.labels }}"
+      IS_DEV: "${{ contains(github.event.pull_request.labels.*.name, 'dev') }}"
     steps:
       - name: echo-labels
         run: |
-          echo "$LABELS"
+          echo "$IS_DEV"
       #- name: dispatch
       #  uses: peter-evans/repository-dispatch@v1
       #  with:
