@@ -16,8 +16,8 @@ jobs:
     steps:
       - id: maybe-set-staging-api-vars
         if: contains(github.event.pull_request.labels.*.name, 'dev')
-        run: |
-          echo 1
+        env:
+          PANGEO_FORGE_API_KEY: "PANGEO_FORGE_API_KEY_STAGING"
       #  if: contains(github.event.pull_request.labels.*.name, 'dev')
       #  env:
       #    PANGEO_FORGE_API_KEY: "PANGEO_FORGE_API_KEY_STAGING"
@@ -27,10 +27,10 @@ jobs:
       #  env:
       #    PANGEO_FORGE_API_KEY: "PANGEO_FORGE_API_KEY_STAGING"
       #    PANGEO_FORGE_API_URL: "https://api-staging.pangeo-forge.org/"
-      #- id: echo-vars
-      #  run: |
+      - id: echo-vars
+        run: |
+          echo ${{ env.PANGEO_FORGE_API_KEY }}
       #    echo ${{ contains(github.event.pull_request.labels.*.name, 'dev') }}
-      #    echo ${{ env.PANGEO_FORGE_API_KEY }}
       #    echo ${{ env.PANGEO_FORGE_API_URL }}
   
       #- name: dispatch
