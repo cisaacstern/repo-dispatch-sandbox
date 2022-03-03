@@ -18,8 +18,15 @@ jobs:
       - id: dispatch
         run: |
           if ${{ env.IS_DEV }}; then \
-             echo "This IS a dev pr."; \
-          fi
+            export PANGEO_FORGE_API_KEY="staging-key" \
+            && export PANGEO_FORGE_API_URL="https://api-staging.pangeo-forge.org/"; \
+          else \
+            export PANGEO_FORGE_API_KEY="prod-key" \
+            && export PANGEO_FORGE_API_URL="https://api.pangeo-forge.org/"; \
+          fi \
+          && \
+          echo $PANGEO_FORGE_API_KEY \
+          && echo $PANGEO_FORGE_API_URL
       #else
       #  echo "This IS NOT a dev pr."
       #fi
