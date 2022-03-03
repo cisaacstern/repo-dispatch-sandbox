@@ -17,11 +17,12 @@ jobs:
     steps:
       - id: dispatch
         run: |
-          if ${{ env.IS_DEV }}; then
-            echo "This IS a dev pr."
-          else
-            echo "This IS NOT a dev pr."
-          fi
+          echo ${{ env.IS_DEV }}
+      # if ${{ env.IS_DEV }}; then
+      #  echo "This IS a dev pr."
+      #else
+      #  echo "This IS NOT a dev pr."
+      #fi
       #- name: dispatch
       #  uses: peter-evans/repository-dispatch@v1
       #  with:
