@@ -1,8 +1,8 @@
 name: Create recipe runs
 
 on:
-  pull_request:
-    branches: main
+  pull_request_target:
+    branches: master
     paths:
       - 'recipes/**'
 
@@ -11,29 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FEEDSTOCK_SPEC: "${{ github.repository }}"
-      HEAD_SHA: "${{ github.sha }}"
+      HEAD_SHA: "${{ github.event.pull_request.head.sha }}"
       PR_NUMBER: "${{ github.event.pull_request.number }}"
-      IS_DEV: "${{ contains(github.event.pull_request.labels.*.name, 'dev') }}"
+      IS_DEV: "${{ contains(github.event.client_payload.pull_request.labels.*.name, 'dev') }}"
     steps:
-      - id: dispatch
-        run: |
-          if ${{ env.IS_DEV }}; then \
-            export PANGEO_FORGE_API_KEY="staging-key" \
-            && export PANGEO_FORGE_API_URL="https://api-staging.pangeo-forge.org/"; \
-          else \
-            export PANGEO_FORGE_API_KEY="prod-key" \
-            && export PANGEO_FORGE_API_URL="https://api.pangeo-forge.org/"; \
-          fi \
-          && \
-          echo $PANGEO_FORGE_API_KEY \
-          && echo $PANGEO_FORGE_API_URL
-      #else
-      #  echo "This IS NOT a dev pr."
-      #fi
-      #- name: dispatch
-      #  uses: peter-evans/repository-dispatch@v1
-      #  with:
-      #    token: ${{ secrets.PAT }}
-      #    repository: pangeo-forge/registrar
-      #    event-type: pull-request-commit
-      #    client-payload: '{"feedstock_spec": "${{ env.FEEDSTOCK_SPEC }}", "head_sha": "${{ env.HEAD_SHA }}", "pr_number": "${{ env.PR_NUMBER }}"}'
+      - name: dispatch
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.PAT }}
+          repository: pangeo-forge/registrar
+          event-type: pull-request-commit
+          client-payload: '{"feedstock_spec": "${{ env.FEEDSTOCK_SPEC }}", "head_sha": "${{ env.HEAD_SHA }}", "pr_number": "${{ env.PR_NUMBER }}", "is_dev":  "${{ env.IS_DEV }}"}'
