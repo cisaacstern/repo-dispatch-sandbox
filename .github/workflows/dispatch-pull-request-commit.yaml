@@ -13,7 +13,7 @@ jobs:
       FEEDSTOCK_SPEC: "${{ github.repository }}"
       HEAD_SHA: "${{ github.event.pull_request.head.sha }}"
       PR_NUMBER: "${{ github.event.pull_request.number }}"
-      IS_DEV: "${{ contains(github.event.client_payload.pull_request.labels.*.name, 'dev') }}"
+      IS_DEV: "${{ contains(github.event.pull_request.labels.*.name, 'dev') }}"
     steps:
       - name: dispatch
         uses: peter-evans/repository-dispatch@v1
