@@ -17,7 +17,9 @@ jobs:
     steps:
       - id: dispatch
         run: |
-          if ${{ env.IS_DEV }}; then echo "This IS a dev pr."; fi
+          if ${{ env.IS_DEV }}; then \
+             echo "This IS a dev pr."; \
+          fi
       #else
       #  echo "This IS NOT a dev pr."
       #fi
