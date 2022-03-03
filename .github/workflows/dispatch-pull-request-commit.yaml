@@ -13,26 +13,15 @@ jobs:
       FEEDSTOCK_SPEC: "${{ github.repository }}"
       HEAD_SHA: "${{ github.sha }}"
       PR_NUMBER: "${{ github.event.pull_request.number }}"
+      IS_DEV: "${{ contains(github.event.pull_request.labels.*.name, 'dev') }}"
     steps:
-      - id: maybe-set-staging-api-vars
-        if: contains(github.event.pull_request.labels.*.name, 'dev')
+      - id: dispatch
         run: |
-          echo 1
-      #  if: contains(github.event.pull_request.labels.*.name, 'dev')
-      #  env:
-      #    PANGEO_FORGE_API_KEY: "PANGEO_FORGE_API_KEY_STAGING"
-      #    PANGEO_FORGE_API_URL: "https://api-staging.pangeo-forge.org/"
-      #- id: maybe-set-prod-api-vars
-      #  if: ${{ !contains(github.event.pull_request.labels.*.name, 'dev') }}
-      #  env:
-      #    PANGEO_FORGE_API_KEY: "PANGEO_FORGE_API_KEY_STAGING"
-      #    PANGEO_FORGE_API_URL: "https://api-staging.pangeo-forge.org/"
-      - id: echo-vars
-        run: |
-          echo ${{ env.PANGEO_FORGE_API_KEY }}
-      #    echo ${{ contains(github.event.pull_request.labels.*.name, 'dev') }}
-      #    echo ${{ env.PANGEO_FORGE_API_URL }}
-  
+          if ${{ env.IS_DEV }}; then
+            echo "This IS a dev pr."
+          else
+            echo "This IS NOT a dev pr."
+          fi
       #- name: dispatch
       #  uses: peter-evans/repository-dispatch@v1
       #  with:
