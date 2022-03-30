@@ -14,5 +14,5 @@ jobs:
       - name: Run Tests
         shell: bash -l {0}
         run: |
-          python3 -c "import shutil; terminal_width = shutil.get_terminal_size().columns; print(terminal_width)"
+          python3 -c "import os; terminal_width = os.get_terminal_size().columns; print(terminal_width)"
 
