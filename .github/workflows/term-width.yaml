@@ -2,7 +2,7 @@
 
 name: Tests
 
-on: workflow-dispatch
+on: workflow_dispatch
 
 env:
   PYTEST_ADDOPTS: "--color=yes"
