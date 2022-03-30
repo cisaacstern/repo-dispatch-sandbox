@@ -1,6 +1,6 @@
 # Compare: https://github.com/pangeo-forge/pangeo-forge-recipes/blob/master/.github/workflows/main.yaml
 
-name: Tests
+name: term width
 
 on: workflow_dispatch
 
