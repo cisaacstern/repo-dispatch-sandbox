@@ -1,0 +1,18 @@
+# Compare: https://github.com/pangeo-forge/pangeo-forge-recipes/blob/master/.github/workflows/main.yaml
+
+name: Tests
+
+on: workflow-dispatch
+
+env:
+  PYTEST_ADDOPTS: "--color=yes"
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Tests
+        shell: bash -l {0}
+        run: |
+          python3 -c "import os; terminal_width = int(os.popen('stty size', 'r').read().split()[-1]); print(terminal_width)"
+
